@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Jumbotron } from 'reactstrap';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { Formulario, Resposta, Grafico } from './components';
 
@@ -14,21 +15,25 @@ function App() {
   const [solucao, setSolucao] = useState(null);
   const [iteracoes, setIteracoes] = useState(1);
   return (
-    <>
-      <Jumbotron>
-        <h1 className="header text-center">Zero de Funções</h1>
-      </Jumbotron>
-      <Container>
-        <Formulario
-          setEquacao={setEquacao}
-          setIsNewton={setIsNewton}
-          setParametros={setParametros}
-          setSolucao={setSolucao}
-          iteracoes={iteracoes} setIteracoes={setIteracoes} />
-        <Resposta solucao={solucao} iteracoes={iteracoes} />
-        <Grafico equacao={equacao} metodo={isNewton} parametros={parametros} solucao={solucao} />
-      </Container>
-    </>
+    <Router>
+      <Switch>
+        <Route path="/">
+          <Jumbotron>
+            <h1 className="header text-center">Zero de Funções</h1>
+          </Jumbotron>
+          <Container>
+            <Formulario
+              setEquacao={setEquacao}
+              setIsNewton={setIsNewton}
+              setParametros={setParametros}
+              setSolucao={setSolucao}
+              iteracoes={iteracoes} setIteracoes={setIteracoes} />
+            <Resposta solucao={solucao} iteracoes={iteracoes} />
+            <Grafico equacao={equacao} metodo={isNewton} parametros={parametros} solucao={solucao} />
+          </Container>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
